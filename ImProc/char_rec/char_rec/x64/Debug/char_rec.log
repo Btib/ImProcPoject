@@ -1,0 +1,20 @@
+﻿Build started 2016.11.26. 18:34:37.
+     1>Project "E:\c++ projects\char_rec\char_rec\char_rec.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         E:\Visual Studiio\VC\bin\x86_amd64\CL.exe /c /IE:\opencv\build\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\char_rec.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt char_rec.cpp
+         char_rec.cpp
+     1>char_rec.cpp(163): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(164): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(165): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(166): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(169): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(171): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+       Link:
+         E:\Visual Studiio\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\c++ projects\char_rec\x64\Debug\char_rec.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\opencv\build\x64\vc12\bin /LIBPATH:E:\opencv\build\x64\vc12\lib opencv_ts300.lib opencv_world300.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\c++ projects\char_rec\x64\Debug\char_rec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\c++ projects\char_rec\x64\Debug\char_rec.lib" /MACHINE:X64 x64\Debug\char_rec.obj
+         x64\Debug\stdafx.obj
+         char_rec.vcxproj -> E:\c++ projects\char_rec\x64\Debug\char_rec.exe
+     1>Done Building Project "E:\c++ projects\char_rec\char_rec\char_rec.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.91
