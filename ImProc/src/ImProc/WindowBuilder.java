@@ -89,6 +89,7 @@ public class WindowBuilder implements ActionListener {
     	mainframe.pack();
     	mainframe.setLocation(dim.width/2-mainframe.getSize().width/2, dim.height/2-mainframe.getSize().height/2);
     	mainframe.setVisible(true);
+    	
     }
 
 	@Override
@@ -116,7 +117,6 @@ public class WindowBuilder implements ActionListener {
 		            jLabel.setIcon(imageIcon);
 		            scrollPane = new JScrollPane();
 		            scrollPane.setViewportView(jLabel);
-		            System.out.println(imageIcon.getIconHeight());
 		            scrollPane.setPreferredSize(new Dimension(imageIcon.getIconWidth() < dim.width/2 ? imageIcon.getIconWidth() : dim.width/2 - 75, imageIcon.getIconHeight() < dim.height ? imageIcon.getIconHeight() : dim.height - 30));
 		            lower.add(scrollPane);
 		            
@@ -128,8 +128,7 @@ public class WindowBuilder implements ActionListener {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-
-		            file2 = new File("Img/wall_of_text_by_zach205-d54tmj1.png");//imageChooser.getSelectedFile();
+		            file2 = new File("Img/ered.jpg");
 		            
 		            try
 		            {
