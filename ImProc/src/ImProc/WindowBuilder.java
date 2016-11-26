@@ -121,7 +121,7 @@ public class WindowBuilder implements ActionListener {
 		            lower.add(scrollPane);
 		            
 		            try {
-						Process process = new ProcessBuilder("b:/Program Files (x86)/PCSX2 1.4.0/pcsx2.exe","filePath",(String) combobox.getSelectedItem()).start();
+						Process process = new ProcessBuilder("char_rec/x64/Debug/char_rec.exe","filePath",(String) combobox.getSelectedItem()).start();
 						process.waitFor();
 					} catch (IOException ex) {
 						ex.printStackTrace();
