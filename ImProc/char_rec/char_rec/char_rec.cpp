@@ -93,7 +93,7 @@ int main(int argc, char * argv[]) {
 
 
 
-	cv::Mat matTestingNumbers = cv::imread("E:\\Egyetem\\Képfelalk\\sample.png");            // read in the test numbers image
+	cv::Mat matTestingNumbers = cv::imread(argv[0]);            // read in the test numbers image
 
 	if (matTestingNumbers.empty()) {                                // if unable to open image
 		std::cout << "error: image not read from file\n\n";         // show error message on command line
@@ -159,7 +159,7 @@ int main(int argc, char * argv[]) {
 	
 	//namedWindow("matTestingNumbers", WINDOW_NORMAL);
 	//cv::imshow("matTestingNumbers", matTestingNumbers);
-	cv::imwrite("E:\\Egyetem\\Képfelalk\\ered.jpg", matTestingNumbers);
+	cv::imwrite("../../../Img/ered.jpg", matTestingNumbers);
 
 	//cv::waitKey(0);                                         // wait for user key press
 
