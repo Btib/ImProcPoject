@@ -128,24 +128,17 @@ int main(int argc, char * argv[]) {
 		alg = 2;
 	}
 	else return 2;
-
+	
 	distance = stof(argv[3]);
 	sizee = stof(argv[4]);
-
-	cv::Mat matClassificationInts;      
-
-
-	cv::Mat matTrainingImagesAsFlattenedFloats;        
-
-
-
+	
 	cv::Mat matTestingNumbers = cv::imread(argv[1]);           
 
 	if (matTestingNumbers.empty()) {                               
 		std::cout << argv[1];        
 		return(1);                                                  
 	}
-
+	
 	cv::Mat matGrayscale;          
 	cv::Mat matBlurred;            
 	cv::Mat matThresh;             
@@ -242,7 +235,6 @@ int main(int argc, char * argv[]) {
 			validContoursWithDataNew.push_back(validContoursWithData[i]);
 		}
 	}
-
 	for (int i = 0; i < validContoursWithDataNew.size(); i++) {            
 
 		if (!validContoursWithDataNew[i].votma) {
@@ -264,9 +256,9 @@ int main(int argc, char * argv[]) {
 	
 	//namedWindow("matTestingNumbers", WINDOW_NORMAL);
 	//cv::imshow("matTestingNumbers", matTestingNumbers);
-	cv::imwrite("..\\..\\..\\Img\\ered.jpg", matTestingNumbers);
-	cv::waitKey(0);                                        
-
-	return(0);
+	cv::imwrite("Img\\ered.jpg", matTestingNumbers);
+	//cv::waitKey(0);                                        
+	cout << validContoursWithData.size() << endl;
+	return 0;
 }
 
