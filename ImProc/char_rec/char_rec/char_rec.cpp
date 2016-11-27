@@ -6,14 +6,16 @@
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
 #include<opencv2/ml/ml.hpp>
+#include <opencv2/opencv.hpp>
 
 #include<iostream>
 #include<sstream>
 
 
 using namespace cv;
+using namespace std;
 // global variables ///////////////////////////////////////////////////////////////////////////////
-const int MIN_CONTOUR_AREA = 30;
+const int MIN_CONTOUR_AREA = 70;
 const int MAX_CONTOUR_AREA = 25000;
 const int RESIZED_IMAGE_WIDTH = 20;
 const int RESIZED_IMAGE_HEIGHT = 30;
@@ -25,6 +27,9 @@ public:
 	std::vector<cv::Point> ptContour;           // contour
 	std::vector<cv::Point> convexHull;
 	cv::Rect boundingRect;                      // bounding rect for contour
+	RotatedRect rRect;
+	bool segedv=false;
+	bool votma = false;
 	float fltArea;                              // area of contour
 	float width;
 	float height ;
@@ -53,7 +58,7 @@ void adaptiveAlgorithm(Mat &input, Mat &output) {
 	// blur
 	cv::GaussianBlur(input,         
 		matBlurred,                
-		cv::Size(7, 7),            
+		cv::Size(5, 5),            
 		1.5);                       
 	//OPEN
 	cv::Mat opened;
@@ -74,11 +79,41 @@ void adaptiveAlgorithm(Mat &input, Mat &output) {
 
 
 	cv::Mat element_close = cv::getStructuringElement(cv::MORPH_ELLIPSE,
-		cv::Size(5, 5));
+		cv::Size(3, 3));
 
 	cv::morphologyEx(matThresh, output, MORPH_CLOSE, element_close);
 }
 
+void otsuAlgorithm(Mat &input, Mat &output) {
+	cv::Mat matBlurred;
+	// blur
+	cv::GaussianBlur(input,
+		matBlurred,
+		cv::Size(5, 5),
+		1.5);
+	cv::threshold(matBlurred, output, 0, 255, CV_THRESH_BINARY_INV | CV_THRESH_OTSU);
+}
+
+
+void MSERDetection(Mat &input, std::vector<std::vector<cv::Point> >  &output) {
+	std::vector< Rect > asd;
+	cv::Mat matBlurred;
+	cv::GaussianBlur(input,
+		matBlurred,
+		cv::Size(3, 3),
+		1.5);
+	//OPEN
+	cv::Mat opened;
+
+	cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,
+		cv::Size(1, 1));
+
+	cv::morphologyEx(matBlurred, opened, MORPH_OPEN, element);
+	Ptr<MSER> detektor = MSER::create();
+	detektor->detectRegions(input, output,asd);
+
+
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> allContoursWithData;           // declare empty vectors,
@@ -93,7 +128,7 @@ int main(int argc, char * argv[]) {
 
 
 
-	cv::Mat matTestingNumbers = cv::imread("E:\\Egyetem\\Képfelalk\\sample.png");            // read in the test numbers image
+	cv::Mat matTestingNumbers = cv::imread("E:\\Egyetem\\Képfelalk\\teszt.jpg");            // read in the test numbers image
 
 	if (matTestingNumbers.empty()) {                                // if unable to open image
 		std::cout << "error: image not read from file\n\n";         // show error message on command line
@@ -107,7 +142,8 @@ int main(int argc, char * argv[]) {
 
 	cv::cvtColor(matTestingNumbers, matGrayscale, CV_BGR2GRAY);         // convert to grayscale
 
-	adaptiveAlgorithm(matGrayscale, matThresh);
+	//adaptiveAlgorithm(matGrayscale, matThresh);
+	otsuAlgorithm(matGrayscale, matThresh);
 	matThreshCopy = matThresh.clone();              
 
 	std::vector<std::vector<cv::Point> > ptContours;        
@@ -118,7 +154,9 @@ int main(int argc, char * argv[]) {
 		v4iHierarchy,                           // output hierarchy
 		cv::RETR_EXTERNAL,                      // retrieve the outermost contours only
 		cv::CHAIN_APPROX_SIMPLE);               // compress horizontal, vertical, and diagonal segments and leave only their end points
+	
 
+	//MSERDetection(matGrayscale, ptContours);
 
 	
 	//imgThreshCopy = eroded.clone();
@@ -140,28 +178,81 @@ int main(int argc, char * argv[]) {
 		allContoursWithData.push_back(contourWithData);                                     // add contour with data object to list of all contours with data
 	}
 
+	int maxHeight=0;
 	for (int i = 0; i < allContoursWithData.size(); i++) {                      // for all contours
 		if (allContoursWithData[i].checkIfContourIsValid()) {                   // check if valid
 			validContoursWithData.push_back(allContoursWithData[i]);            // if so, append to valid contour list
+			if (maxHeight < allContoursWithData[i].height) {
+				maxHeight = allContoursWithData[i].height;
+			}
 		}
 	}
 
-	for (int i = 0; i < validContoursWithData.size(); i++) {            // for each contour
+	std::vector<ContourWithData> validContoursWithDataNew;
 
-		// draw a green rect around the current char
-		cv::rectangle(matTestingNumbers,                            // draw rectangle on original image
-			validContoursWithData[i].boundingRect,        // rect to draw
-			cv::Scalar(0, 255, 0),                        // green
-			2);                                           // thickness
+	for (int i = 0; i < validContoursWithData.size(); i++) {
+		if (validContoursWithData[i].fltArea < 200 ) {
+			for (int j = 0; j < validContoursWithData.size(); j++) {
+				Moments m1 = moments(Mat(validContoursWithData[i].ptContour), false);
+				Moments m2 = moments(Mat(validContoursWithData[j].ptContour), false);
+				float x1 = m1.m10 / m1.m00;
+				float y1 = m1.m01 / m1.m00;
+				float x2 = m2.m10 / m2.m00;
+				float y2 = m2.m01 / m2.m00;
+				vector<Point> dist;
+				dist.push_back(Point(x1, y1));
+				dist.push_back(Point(x2, y2));
+				float d = arcLength(dist, false);
+				//cout << "fent vagyok" << endl;
+				if (validContoursWithData[i].boundingRect != validContoursWithData[j].boundingRect) {
+					if (d < 47.5 && validContoursWithData[j].height < (maxHeight * 0.8) && validContoursWithData[j].fltArea > 200) {
+						ContourWithData contourData;
+						std::vector<cv::Point> points;
+						validContoursWithData[j].votma = true;
+						validContoursWithData[i].votma = true;
+						points.insert(points.end(), validContoursWithData[i].ptContour.begin(), validContoursWithData[i].ptContour.end());
+						points.insert(points.end(), validContoursWithData[j].ptContour.begin(), validContoursWithData[j].ptContour.end());
+						contourData.ptContour = points;
+						contourData.rRect = minAreaRect(points);
+						contourData.segedv = true;
+						validContoursWithDataNew.push_back(contourData);
+						//cout << "itt vagyok" << endl;
+					}
+				}
+			}
+		}
+	}
 
+	for (int i = 0; i < validContoursWithData.size(); i++) {
+		if (!validContoursWithData[i].votma) {
+			validContoursWithDataNew.push_back(validContoursWithData[i]);
+		}
+	}
+
+	for (int i = 0; i < validContoursWithDataNew.size(); i++) {            // for each contour
+
+		if (!validContoursWithDataNew[i].votma) {
+			cv::rectangle(matTestingNumbers,                            // draw rectangle on original image
+				validContoursWithDataNew[i].boundingRect,        // rect to draw
+				cv::Scalar(0, 255, 0),                        // green
+				2);                                           // thickness
+		}
+		if (validContoursWithDataNew[i].segedv) {
+			cv::Point2f vertices[4];
+			validContoursWithDataNew[i].rRect.points(vertices);
+			for (int i = 0; i < 4; ++i)
+			{
+				cv::line(matTestingNumbers, vertices[i], vertices[(i + 1) % 4], cv::Scalar(0, 255, 0), 1, CV_AA);
+			}
+		}
 	}
 
 	
-	//namedWindow("matTestingNumbers", WINDOW_NORMAL);
-	//cv::imshow("matTestingNumbers", matTestingNumbers);
+	namedWindow("matTestingNumbers", WINDOW_NORMAL);
+	cv::imshow("matTestingNumbers", matTestingNumbers);
 	cv::imwrite("E:\\Egyetem\\Képfelalk\\ered.jpg", matTestingNumbers);
 
-	//cv::waitKey(0);                                         // wait for user key press
+	cv::waitKey(0);                                         // wait for user key press
 
 	return(0);
 }
