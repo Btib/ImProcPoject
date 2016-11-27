@@ -3,7 +3,6 @@ package ImProc;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -38,6 +37,8 @@ public class WindowBuilder implements ActionListener {
 	private JFrame mainframe;
 	private JLabel jLabel;
 	private JLabel jLabel2;
+	private JLabel sizeLabel;
+	private JLabel lineHeightLabel;
 	private ImageIcon imageIcon;
 	private ImageIcon imageIcon2;
 	private JScrollPane scrollPane;
@@ -46,6 +47,8 @@ public class WindowBuilder implements ActionListener {
 	private Dimension dim ;
 	private String[] algorithms = {"Elsõ", "Második"};
 	private boolean notfirst;
+	private JTextField size;
+	private JTextField lineHeight;
 		
 	public WindowBuilder(){
 		setupWindow();
@@ -81,9 +84,18 @@ public class WindowBuilder implements ActionListener {
     	
     	jLabel = new JLabel();
     	jLabel2 = new JLabel();   
+    	sizeLabel = new JLabel("Betûméret:");
+    	lineHeightLabel = new JLabel("Sortávolság:");
+    	
+    	size = new JTextField(5);
+    	lineHeight = new JTextField(5);
     	
     	upper.add(openImageButton);
     	upper.add(combobox);
+    	upper.add(sizeLabel);    	
+    	upper.add(size);
+    	upper.add(lineHeightLabel);
+    	upper.add(lineHeight);
     	mainframe.add(upper, BorderLayout.NORTH);
     	mainframe.setResizable(true);
     	mainframe.pack();
@@ -121,7 +133,7 @@ public class WindowBuilder implements ActionListener {
 		            lower.add(scrollPane);
 		            
 		            try {
-						Process process = new ProcessBuilder("char_rec/x64/Debug/char_rec.exe","filePath",(String) combobox.getSelectedItem()).start();
+						Process process = new ProcessBuilder("char_rec/x64/Debug/char_rec.exe",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
 						process.waitFor();
 					} catch (IOException ex) {
 						ex.printStackTrace();
