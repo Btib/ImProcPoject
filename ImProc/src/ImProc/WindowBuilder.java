@@ -140,7 +140,7 @@ public class WindowBuilder implements ActionListener {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-		            file2 = new File("c:/Users/Aecelus/Pictures/wall_of_text_by_zach205-d54tmj1.png");
+		            file2 = new File("Img/ered.jpg");
 		            
 		            try
 		            {
