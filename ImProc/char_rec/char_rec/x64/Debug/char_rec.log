@@ -1,4 +1,4 @@
-﻿Build started 2016.11.27. 21:21:48.
+﻿Build started 2016.11.27. 22:20:05.
      1>Project "E:\Egyetem\Képfelalk\proj\ImProcPoject\ImProc\char_rec\char_rec\char_rec.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          E:\Visual Studiio\VC\bin\x86_amd64\CL.exe /c /IE:\opencv\build\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\char_rec.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt char_rec.cpp
@@ -25,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.07
+Time Elapsed 00:00:01.52

@@ -43,7 +43,7 @@ public:
 			return true;
 		}
 		else return false;*/
-		if (fltArea > MIN_CONTOUR_AREA && fltArea < MAX_CONTOUR_AREA && occupyRate >= 0.03 && occupyRate <= 0.95 && compactness >= 0.003 && compactness < 0.95) {
+		if (fltArea > MIN_CONTOUR_AREA && fltArea < MAX_CONTOUR_AREA && occupyRate >= 0.03 && occupyRate <= 0.97 && compactness >= 0.003 && compactness < 0.95) {
 			return true;
 		}
 		else return false;
@@ -129,8 +129,8 @@ int main(int argc, char * argv[]) {
 	}
 	else return 2;
 	
-	distance = stof(argv[3]);
-	sizee = stof(argv[4]);
+	distance = stof(argv[4]);
+	sizee = stof(argv[3]);
 	
 	cv::Mat matTestingNumbers = cv::imread(argv[1]);           
 
@@ -258,7 +258,6 @@ int main(int argc, char * argv[]) {
 	//cv::imshow("matTestingNumbers", matTestingNumbers);
 	cv::imwrite("Img\\ered.jpg", matTestingNumbers);
 	//cv::waitKey(0);                                        
-	cout << validContoursWithData.size() << endl;
 	return 0;
 }
 
