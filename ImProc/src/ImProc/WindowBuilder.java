@@ -7,9 +7,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import java.io.InputStream;
 
 public class WindowBuilder implements ActionListener {
 	
@@ -134,19 +138,20 @@ public class WindowBuilder implements ActionListener {
 		            lower.add(scrollPane);
 		            
 		            try {
-		            	File fill = new File("run.bat");
-		            	fill.createNewFile();
-		                FileWriter writer = new FileWriter(fill); 
-		                writer.write("char_rec\\x64\\Debug\\char_rec.exe " + filePath + " " + (String) combobox.getSelectedItem() + " " + size.getText() + " " + lineHeight.getText()); 
-		                writer.flush();
-		                writer.close();
-						Process process = new ProcessBuilder("run.bat",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
-						process.waitFor();
+						Process process = new ProcessBuilder("char_rec\\x64\\Debug\\char_rec.exe",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
+					    InputStream is = process.getInputStream();
+						InputStreamReader isr = new InputStreamReader(is);
+						BufferedReader br = new BufferedReader(isr);
+						String line;
+						while ((line = br.readLine()) != null) {
+							  System.out.println(line);
+						}
+						//process.waitFor();
 					} catch (IOException ex) {
 						ex.printStackTrace();
-					} catch (InterruptedException e1) {
+					} /*catch (InterruptedException e1) {
 						e1.printStackTrace();
-					}
+					}*/
 		            file2 = new File("Img/ered.jpg");
 		            
 		            try
