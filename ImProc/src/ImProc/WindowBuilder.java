@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -43,7 +44,6 @@ public class WindowBuilder implements ActionListener {
 	private ImageIcon imageIcon2;
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane2;
-	private JScrollPane mainpane;
 	private JComboBox<String> combobox;
 	private Dimension dim ;
 	private String[] algorithms = {"1", "2"};
@@ -102,6 +102,7 @@ public class WindowBuilder implements ActionListener {
     	mainframe.pack();
     	mainframe.setLocation(dim.width/2-mainframe.getSize().width/2, dim.height/2-mainframe.getSize().height/2);
     	mainframe.setVisible(true);
+    	
     }
 
 	@Override
@@ -158,15 +159,12 @@ public class WindowBuilder implements ActionListener {
 
 		            scrollPane2 = new JScrollPane();
 		            scrollPane2.setViewportView(jLabel2);
-		            scrollPane2.setPreferredSize(new Dimension(imageIcon2.getIconWidth() < dim.width/2 ? imageIcon2.getIconWidth() : dim.width/2 - 75, imageIcon2.getIconHeight() < dim.height ? imageIcon2.getIconHeight() : dim.height - 30));		            
+		            scrollPane2.setPreferredSize(new Dimension(imageIcon2.getIconWidth() < dim.width/2 ? imageIcon2.getIconWidth() : dim.width/2 - 75, imageIcon2.getIconHeight() < dim.height ? imageIcon2.getIconHeight() : dim.height - 30));
 		            lower.add(scrollPane2);
-		            mainpane = new JScrollPane();
-		            mainpane.setViewportView(lower);
-		            mainpane.setPreferredSize(new Dimension((int)dim.getWidth(),(int)dim.getHeight()));
-		            mainframe.add(mainpane, BorderLayout.CENTER);
+		            mainframe.add(lower, BorderLayout.CENTER);
 		            mainframe.pack();
 		            mainframe.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-			        mainframe.setLocation(dim.width/2-mainframe.getSize().width/2, dim.height/2-mainframe.getSize().height/2);
+			        mainframe.setLocation(dim.width/2-mainframe.getSize().width/2, dim.height/2-mainframe.getSize().height/2 - 10);
 			        notfirst = true;
 		            mainframe.setVisible(true);
 		        } 
