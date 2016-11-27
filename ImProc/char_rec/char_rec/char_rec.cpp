@@ -124,7 +124,7 @@ int main(int argc, char * argv[]) {
 	string elso = "1";
 	string masodik = "2";
 	int alg=1;
-	if (elso.compare(argv[1]) == 0) {
+	if (elso.compare(argv[2]) == 0) {
 		alg = 1;
 	}
 	else if (masodik.compare(masodik) == 0) {
@@ -132,8 +132,8 @@ int main(int argc, char * argv[]) {
 	}
 	else return 2;
 
-	distance = stof(argv[2]);
-	sizee = stof(argv[3]);
+	distance = stof(argv[3]);
+	sizee = stof(argv[4]);
 
 	cv::Mat matClassificationInts;      // we will read the classification numbers into this variable as though it is a vector
 
@@ -142,10 +142,10 @@ int main(int argc, char * argv[]) {
 
 
 
-	cv::Mat matTestingNumbers = cv::imread(argv[0]);            // read in the test numbers image
+	cv::Mat matTestingNumbers = cv::imread(argv[1]);            // read in the test numbers image
 
 	if (matTestingNumbers.empty()) {                                // if unable to open image
-		std::cout << "error: image not read from file\n\n";         // show error message on command line
+		std::cout << argv[1];         // show error message on command line
 		return(1);                                                  // and exit program
 	}
 
