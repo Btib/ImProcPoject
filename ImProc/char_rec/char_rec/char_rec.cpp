@@ -10,6 +10,7 @@
 
 #include<iostream>
 #include<sstream>
+#include <string>
 
 
 using namespace cv;
@@ -118,7 +119,21 @@ void MSERDetection(Mat &input, std::vector<std::vector<cv::Point> >  &output) {
 int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> allContoursWithData;           // declare empty vectors,
 	std::vector<ContourWithData> validContoursWithData;         // we will fill these shortly
+	float dist = 0.0;
+	float size = 0.0;
+	string elso = "elsõ";
+	string masodik = "második";
+	int alg=0;
+	if (elso.compare(argv[1]) == 0) {
+		alg = 1;
+	}
+	else if (masodik.compare(masodik) == 0) {
+		alg = 2;
+	}
+	else return 2;
 
+	dist = stof(argv[2]);
+	size = stof(argv[3]);
 	// read in training classifications ///////////////////////////////////////////////////
 
 	cv::Mat matClassificationInts;      // we will read the classification numbers into this variable as though it is a vector
@@ -142,8 +157,13 @@ int main(int argc, char * argv[]) {
 
 	cv::cvtColor(matTestingNumbers, matGrayscale, CV_BGR2GRAY);         // convert to grayscale
 
-	//adaptiveAlgorithm(matGrayscale, matThresh);
-	otsuAlgorithm(matGrayscale, matThresh);
+	if (alg == 1) {
+		adaptiveAlgorithm(matGrayscale, matThresh);
+	}
+	else if(alg== 2) {
+		otsuAlgorithm(matGrayscale, matThresh);
+	}
+	
 	matThreshCopy = matThresh.clone();              
 
 	std::vector<std::vector<cv::Point> > ptContours;        
@@ -191,7 +211,7 @@ int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> validContoursWithDataNew;
 
 	for (int i = 0; i < validContoursWithData.size(); i++) {
-		if (validContoursWithData[i].fltArea < 200 ) {
+		if (validContoursWithData[i].fltArea < size ) {
 			for (int j = 0; j < validContoursWithData.size(); j++) {
 				Moments m1 = moments(Mat(validContoursWithData[i].ptContour), false);
 				Moments m2 = moments(Mat(validContoursWithData[j].ptContour), false);
@@ -205,7 +225,7 @@ int main(int argc, char * argv[]) {
 				float d = arcLength(dist, false);
 				//cout << "fent vagyok" << endl;
 				if (validContoursWithData[i].boundingRect != validContoursWithData[j].boundingRect) {
-					if (d < 47.5 && validContoursWithData[j].height < (maxHeight * 0.8) && validContoursWithData[j].fltArea > 200) {
+					if (d < dist && validContoursWithData[j].height < (maxHeight * 0.8) && validContoursWithData[j].fltArea > size) {
 						ContourWithData contourData;
 						std::vector<cv::Point> points;
 						validContoursWithData[j].votma = true;

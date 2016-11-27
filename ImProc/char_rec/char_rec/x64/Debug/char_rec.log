@@ -1,22 +1,22 @@
-﻿Build started 2016.11.27. 17:50:08.
+﻿Build started 2016.11.27. 18:20:51.
      1>Project "E:\Egyetem\Képfelalk\proj\ImProcPoject\ImProc\char_rec\char_rec\char_rec.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          E:\Visual Studiio\VC\bin\x86_amd64\CL.exe /c /IE:\opencv\build\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\char_rec.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt char_rec.cpp
          char_rec.cpp
-     1>char_rec.cpp(168): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(169): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>char_rec.cpp(170): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>char_rec.cpp(171): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>char_rec.cpp(174): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(176): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(186): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>char_rec.cpp(198): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(199): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(200): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(201): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>char_rec.cpp(203): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>char_rec.cpp(204): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>char_rec.cpp(205): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(188): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(189): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(190): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(191): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>char_rec.cpp(194): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(196): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(206): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>char_rec.cpp(218): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(219): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(220): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(221): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>char_rec.cpp(223): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>char_rec.cpp(224): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>char_rec.cpp(225): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
        Link:
          E:\Visual Studiio\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Egyetem\Képfelalk\proj\ImProcPoject\ImProc\char_rec\x64\Debug\char_rec.exe" /INCREMENTAL /NOLOGO /LIBPATH:E:\opencv\build\x64\vc12\bin /LIBPATH:E:\opencv\build\x64\vc12\lib opencv_ts300.lib opencv_world300.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Egyetem\Képfelalk\proj\ImProcPoject\ImProc\char_rec\x64\Debug\char_rec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Egyetem\Képfelalk\proj\ImProcPoject\ImProc\char_rec\x64\Debug\char_rec.lib" /MACHINE:X64 x64\Debug\char_rec.obj
          x64\Debug\stdafx.obj
@@ -25,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.06
+Time Elapsed 00:00:01.50
