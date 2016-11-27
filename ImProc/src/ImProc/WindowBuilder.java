@@ -45,7 +45,7 @@ public class WindowBuilder implements ActionListener {
 	private JScrollPane scrollPane2;
 	private JComboBox<String> combobox;
 	private Dimension dim ;
-	private String[] algorithms = {"Elsõ", "Második"};
+	private String[] algorithms = {"1", "2"};
 	private boolean notfirst;
 	private JTextField size;
 	private JTextField lineHeight;
@@ -140,7 +140,7 @@ public class WindowBuilder implements ActionListener {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-		            file2 = new File("Img/ered.jpg");
+		            file2 = new File("c:/Users/Aecelus/Pictures/wall_of_text_by_zach205-d54tmj1.png");
 		            
 		            try
 		            {
