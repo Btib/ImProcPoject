@@ -7,11 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -25,8 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import java.io.InputStream;
 
 public class WindowBuilder implements ActionListener {
 	
@@ -137,22 +132,15 @@ public class WindowBuilder implements ActionListener {
 		            scrollPane.setViewportView(jLabel);
 		            scrollPane.setPreferredSize(new Dimension(imageIcon.getIconWidth() < dim.width/2 ? imageIcon.getIconWidth() : dim.width/2 - 75, imageIcon.getIconHeight() < dim.height ? imageIcon.getIconHeight() : dim.height - 30));
 		            lower.add(scrollPane);
-		            System.out.println(filePath);
+		            
 		            try {
 						Process process = new ProcessBuilder("char_rec\\x64\\Debug\\char_rec.exe",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
-					    InputStream is = process.getInputStream();
-						InputStreamReader isr = new InputStreamReader(is);
-						BufferedReader br = new BufferedReader(isr);
-						String line;
-						while ((line = br.readLine()) != null) {
-							  System.out.println(line);
-						}
-						//process.waitFor();
+						process.waitFor();
 					} catch (IOException ex) {
 						ex.printStackTrace();
-					} /*catch (InterruptedException e1) {
+					} catch (InterruptedException e1) {
 						e1.printStackTrace();
-					}*/
+					}
 		            file2 = new File("Img/ered.jpg");
 		            
 		            try
