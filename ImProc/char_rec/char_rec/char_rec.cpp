@@ -119,11 +119,11 @@ void MSERDetection(Mat &input, std::vector<std::vector<cv::Point> >  &output) {
 int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> allContoursWithData;           // declare empty vectors,
 	std::vector<ContourWithData> validContoursWithData;         // we will fill these shortly
-	float dist = 0.0;
-	float size = 0.0;
+	float distance = 50;
+	float sizee = 200;
 	string elso = "elsõ";
 	string masodik = "második";
-	int alg=0;
+	int alg=1;
 	if (elso.compare(argv[1]) == 0) {
 		alg = 1;
 	}
@@ -132,9 +132,8 @@ int main(int argc, char * argv[]) {
 	}
 	else return 2;
 
-	dist = stof(argv[2]);
-	size = stof(argv[3]);
-	// read in training classifications ///////////////////////////////////////////////////
+	distance = stof(argv[2]);
+	sizee = stof(argv[3]);
 
 	cv::Mat matClassificationInts;      // we will read the classification numbers into this variable as though it is a vector
 
@@ -211,7 +210,7 @@ int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> validContoursWithDataNew;
 
 	for (int i = 0; i < validContoursWithData.size(); i++) {
-		if (validContoursWithData[i].fltArea < size ) {
+		if (validContoursWithData[i].fltArea < sizee ) {
 			for (int j = 0; j < validContoursWithData.size(); j++) {
 				Moments m1 = moments(Mat(validContoursWithData[i].ptContour), false);
 				Moments m2 = moments(Mat(validContoursWithData[j].ptContour), false);
@@ -225,7 +224,7 @@ int main(int argc, char * argv[]) {
 				float d = arcLength(dist, false);
 				//cout << "fent vagyok" << endl;
 				if (validContoursWithData[i].boundingRect != validContoursWithData[j].boundingRect) {
-					if (d < dist && validContoursWithData[j].height < (maxHeight * 0.8) && validContoursWithData[j].fltArea > size) {
+					if (d < distance && validContoursWithData[j].height < (maxHeight * 0.8) && validContoursWithData[j].fltArea > sizee) {
 						ContourWithData contourData;
 						std::vector<cv::Point> points;
 						validContoursWithData[j].votma = true;
@@ -270,7 +269,7 @@ int main(int argc, char * argv[]) {
 	
 	//namedWindow("matTestingNumbers", WINDOW_NORMAL);
 	//cv::imshow("matTestingNumbers", matTestingNumbers);
-	cv::imwrite("../../../Img/ered.jpg", matTestingNumbers);
+	cv::imwrite("..\\..\\..\\Img\\ered.jpg", matTestingNumbers);
 	cv::waitKey(0);                                         // wait for user key press
 
 	return(0);
