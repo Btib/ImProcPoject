@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -133,7 +134,13 @@ public class WindowBuilder implements ActionListener {
 		            lower.add(scrollPane);
 		            
 		            try {
-						Process process = new ProcessBuilder("char_rec/x64/Debug/char_rec.exe",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
+		            	File fill = new File("run.bat");
+		            	fill.createNewFile();
+		                FileWriter writer = new FileWriter(fill); 
+		                writer.write("char_rec\\x64\\Debug\\char_rec.exe " + filePath + " " + (String) combobox.getSelectedItem() + " " + size.getText() + " " + lineHeight.getText()); 
+		                writer.flush();
+		                writer.close();
+						Process process = new ProcessBuilder("run.bat",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
 						process.waitFor();
 					} catch (IOException ex) {
 						ex.printStackTrace();
