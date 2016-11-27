@@ -121,8 +121,8 @@ int main(int argc, char * argv[]) {
 	std::vector<ContourWithData> validContoursWithData;         // we will fill these shortly
 	float distance = 50;
 	float sizee = 200;
-	string elso = "elsõ";
-	string masodik = "második";
+	string elso = "1";
+	string masodik = "2";
 	int alg=1;
 	if (elso.compare(argv[1]) == 0) {
 		alg = 1;
