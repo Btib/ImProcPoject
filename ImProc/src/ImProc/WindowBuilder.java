@@ -120,6 +120,7 @@ public class WindowBuilder implements ActionListener {
 		        	}
 		            file = imageChooser.getSelectedFile();		            
 		            String filePath = file.getAbsolutePath();
+		            filePath = getrekt(filePath);
 		            try
 		            {
 		              image = ImageIO.read(file);
@@ -136,7 +137,7 @@ public class WindowBuilder implements ActionListener {
 		            scrollPane.setViewportView(jLabel);
 		            scrollPane.setPreferredSize(new Dimension(imageIcon.getIconWidth() < dim.width/2 ? imageIcon.getIconWidth() : dim.width/2 - 75, imageIcon.getIconHeight() < dim.height ? imageIcon.getIconHeight() : dim.height - 30));
 		            lower.add(scrollPane);
-		            
+		            System.out.println(filePath);
 		            try {
 						Process process = new ProcessBuilder("char_rec\\x64\\Debug\\char_rec.exe",filePath,(String) combobox.getSelectedItem(), size.getText(), lineHeight.getText()).start();
 					    InputStream is = process.getInputStream();
@@ -179,5 +180,9 @@ public class WindowBuilder implements ActionListener {
 		            mainframe.setVisible(true);
 		        } 
 		}
+	}
+	private String getrekt(String a){
+		String source = a.replace("\\","\\\\"); 		
+		return source;
 	}
 }
